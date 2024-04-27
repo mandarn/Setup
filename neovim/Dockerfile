@@ -16,11 +16,6 @@ RUN mkdir -p ~/.config/nvim && \
 
 ENV PATH="$PATH:/opt/nvim/"
 
-# Install TabNine
-#RUN mkdir -p ~/.config/nvim && \
-#    curl -LO https://github.com/codota/tabnine-vim/archive/refs/tags/2.10.0.tar.gz && \
-#    tar xzf 2.10.0.tar.gz -C /root/.config/nvim
-
 # Setup vim-plug so that init.vim works
 RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -29,6 +24,7 @@ RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 COPY bashrc /root/.bashrc
 
 # Set up Neovim configuration
+COPY vimrc /root/.vim/.vimrc
 COPY init.vim /root/.config/nvim/init.vim 
 
 # Setup nodejs which is needed for auto completion engines.
