@@ -1,13 +1,12 @@
 " Minimalist Neovim configuration for C++ development
 
+source ~/.config/nvim/indent/cpp.vim
+
 " Set the leader key to comma
 let mapleader = ","
 
 " Enable line numbers
 set number
-set ts=2
-set sw=2
-set smarttab
 
 " Enable syntax highlighting
 syntax enable
@@ -81,6 +80,9 @@ inoremap <expr> <TAB> pumvisible() ? "<C-y>" : "<TAB>"
 " <C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+map <C-K> :py3f /sbin/clang-format.py<cr>
+imap <C-K> <c-o>:py3f /sbin/clang-format.py<cr>
 
 lua <<EOF
 require('tabnine').setup({
