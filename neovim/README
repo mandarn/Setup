@@ -1,0 +1,4 @@
+Run following commands after opening nvim for the first time -
+	1. :PlugInstall
+	2. :CocInstall coc-clangd
+	3. :CocCommand clangd.install (For inline c++ auto completions as well as errors)
