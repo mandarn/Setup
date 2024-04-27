@@ -22,15 +22,27 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Completion engine for neovim coded in lua
 Plug 'hrsh7th/nvim-cmp'
 
+" Install tabnine binaries directly using neovim 
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+
 " Tabnine client for neovim
 Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 
-" LSP client for neovim
-Plug 'neovim/nvim-lspconfig'
+" Telescope plugin
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
+Plug 'sharkdp/fd'
+Plug 'BurntSushi/ripgrep'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/playground'
+Plug 'nvim-telescope/telescope-fzf-native.nvim'
 
-" Auto completion framework. nvim-cmp should have been sufficient but
-" it needs to be configured well.
-Plug 'nvim-lua/completion-nvim'
+" Old school cscope nvaigation
+Plug 'dhananjaylatkar/cscope_maps.nvim'
+
+
+" Install	ctags like plugin
+Plug 'ludovicchabant/vim-gutentags'
 
 " Add other plugins as needed
 call plug#end()
@@ -47,24 +59,28 @@ colorscheme desert
 
 " Your other custom settings go here
 
-" Below settings are for completion-nvim
-"" Use <Tab> and <S-Tab> to navigate through popup menu
-"inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"
-"" Set completeopt to have a better completion experience
-"set completeopt=menuone,noinsert,noselect
-"
-"" Avoid showing message extra message when using completion
-"set shortmess+=c
-
-inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
-:set completeopt-=preview
-nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
-
 " Save and quit
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+inoremap <expr> <TAB> pumvisible() ? "<C-y>" : "<TAB>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 lua <<EOF
 require('tabnine').setup({

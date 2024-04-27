@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 
 # Install Neovim, required packages, and build essentials
 RUN apt-get update && \
-    apt-get install -y curl python3 python3-pip build-essential libfuse2 git && \
+    apt-get install -y curl python3 python3-pip build-essential libfuse2 git cscope ctags global ripgrep fd-find && \
     pip3 install pynvim
 
 # Set the shell to bash
