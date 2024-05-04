@@ -1,5 +1,3 @@
-# Source: https://github.com/llvm-mirror/clang/blob/master/tools/clang-format/clang-format.py
-#
 # This file is a minimal clang-format vim-integration. To install:
 # - Change 'binary' if clang-format is not on the path (see below).
 # - Add to your .vimrc:

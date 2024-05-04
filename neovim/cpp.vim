@@ -1,5 +1,3 @@
-" Source: https://www.vim.org/scripts/script.php?script_id=2636
-"
 " Vim indent file
 " Language:	C++
 " Maintainer:	Konstantin Lepa <konstantin.lepa@gmail.com>
