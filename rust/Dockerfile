@@ -36,7 +36,7 @@ RUN git clone https://github.com/ycm-core/YouCompleteMe.git /home/$USER/.vim/bun
     git submodule update --init --recursive && \
     python3 install.py --clangd-completer --rust-completer
 
-# Copy local vimrc to root
+# Copy local vimrc to home directory
 COPY .vimrc /home/$USER/
 
 # .ycm_extra_conf.py
@@ -48,6 +48,7 @@ RUN curl --insecure -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install vim plugins manually
+# source: https://raw.githubusercontent.com/hmybmny/vimrc/master/install-vim-plugins
 # vim +PlugInstall
 
 # Set the entry point (you can customize this)
